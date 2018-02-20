@@ -2,11 +2,11 @@ class Board
 	attr_reader :squares
 
 	def initialize
-		@squares = Array.new(3){Array.new(3,"-")}
+		@squares = [[1,2,3],[4,5,6],[7,8,9]]
 		draw_board
 	end
 
-	def move(input)
+	def move(side, input)
 		return true
 	end
 
