@@ -7,7 +7,13 @@ class Board
 	end
 
 	def move(side, input)
-		return true
+		i = squares.index{|x| x.include? input}
+		if !i.nil? then
+			squares[i][squares[i].index(input)] = side
+			draw_board
+			return true
+		else return false
+		end
 	end
 
 	private

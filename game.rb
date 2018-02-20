@@ -26,11 +26,16 @@ require './board.rb'
 			while input = gets.chomp
 				case input.to_i
 				when 1..9
-					if @board.move(@players[i].side, input.to_i) then break
-					else playing = false; break
+					if @board.move(@players[i].side, input.to_i) then
+						break;
+					else 
+						i = i == 2 ? 1 : 2
+						puts "\nPlease  select an unoccupied space on the board."
+						/--playing=false--/
+						break
 					end
 				else
-					puts "\nPlease enter a number 1 to 9"
+					puts "\nPlease enter a number between 1 and 9."
 				end
 			end
 			i = i == 2 ? 1 : 2
