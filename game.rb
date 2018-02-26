@@ -8,17 +8,17 @@ require './board.rb'
 		puts "Enter a name for player 2"
 		@p2 = Player.new(gets.chomp, "O")
 
+
 		@players = { 1 => @p1, 2 => @p2}
 		
 		puts "\nSimply enter a number 1-9 to make your move\n"
-
-		@board = Board.new
 		play
 	end
 
 	private
 
 	def play
+		@board = Board.new
 		i = 1
 		playing = true
 		while playing
@@ -31,6 +31,7 @@ require './board.rb'
 						break;
 					when 0 
 						puts "\n#{@players[i].name} won the round!"
+						@players[i].score += 1
 						playing = false
 						break;
 					else 
@@ -43,6 +44,13 @@ require './board.rb'
 				end
 			end
 			i = i == 2 ? 1 : 2
+		end
+		puts "Do you want to play again? Y/N"
+		case gets.chomp
+		when "y" || "Y"
+			play
+		else
+			puts "Final scores -\n#{@players[1].name}: #{@players[1].score}\n#{@players[2].name}: #{@players[2].score}"
 		end
 	end
 
