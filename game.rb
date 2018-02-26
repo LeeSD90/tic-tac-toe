@@ -10,15 +10,15 @@ require './board.rb'
 
 		@players = { 1 => @p1, 2 => @p2}
 		
-		puts "\nSimply enter a number 1-9 to make your move"
+		puts "\nSimply enter a number 1-9 to make your move\n"
 
 		@board = Board.new
-		play_round
+		play
 	end
 
 	private
 
-	def play_round
+	def play
 		i = 1
 		playing = true
 		while playing
@@ -26,13 +26,17 @@ require './board.rb'
 			while input = gets.chomp
 				case input.to_i
 				when 1..9
-					if @board.move(@players[i].side, input.to_i) then
+					case @board.move(@players[i].side, input.to_i)
+					when 1 
+						break;
+					when 0 
+						puts "\n#{@players[i].name} won the round!"
+						playing = false
 						break;
 					else 
 						i = i == 2 ? 1 : 2
 						puts "\nPlease  select an unoccupied space on the board."
-						/--playing=false--/
-						break
+						break;
 					end
 				else
 					puts "\nPlease enter a number between 1 and 9."
